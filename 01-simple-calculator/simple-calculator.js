@@ -26,3 +26,7 @@ function calculer(number1, number2, operator) {
 }
 
 console.log(calculer(number1Element,number2Element,operatorElement))
+document.getElementById("btn").addEventListener("click", fonction (){
+    const resultat = calculer(number1Element,number2Element,operatorElement);
+    resultatElement.texteContent = "Resultat : " + resultat;
+});
