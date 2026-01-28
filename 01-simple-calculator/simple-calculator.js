@@ -27,7 +27,7 @@ function calculer(number1, number2, operator) {
 
 console.log(calculer(number1Element, number2Element, operatorElement));
 
-document.getElementById("btn").addEventListener("click",function () { 
-    const result = calculer(number1Element, number2Element, operatorElement);
-    resultatElement.texteContent = "resultat : " + result;
-});
+document.getElementById("btn").addEventListener("click",function();{
+    result = calculer(number1Element, number2Element, operatorElement);
+    resultatElement.textContent = "Resultat : " + result;
+})
