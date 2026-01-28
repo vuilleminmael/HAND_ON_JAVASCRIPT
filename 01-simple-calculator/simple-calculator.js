@@ -26,12 +26,13 @@ function calculer(number1, number2, operator) {
 }
 
 console.log(calculer(number1Element,number2Element,operatorElement))
-document.getElementById("btn").addEventListener("click", fonction (){
+document.getElementById("btn").addEventListener("click", fonction (),{
 
 
 
 
     
-     result = calculer(number1Element,number2Element,operatorElement);
-    resultatElement.textContent = "Resultat : " + resultat;
+     result = calculer(number1Element,number2Element,operatorElement),
+    resultatElement.textContent = "Resultat : " + resultat,
 });
+document.write(resultat)
