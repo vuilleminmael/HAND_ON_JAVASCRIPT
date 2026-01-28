@@ -32,7 +32,7 @@ document.getElementById("btn").addEventListener("click", fonction (),{
 
 
     
-     result = calculer(number1Element,number2Element,operatorElement),
-    resultatElement.textContent = "Result : " + result,
+    result = calculer(number1Element, number2Element, operatorElement);
+resultatElement.textContent = "Resultat : " + result;
 });
-document.write("result :")
+document.getElementById('resultat').innerText = "Résultat " + somme; 
