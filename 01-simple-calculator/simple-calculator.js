@@ -33,6 +33,6 @@ document.getElementById("btn").addEventListener("click", fonction (),{
 
     
      result = calculer(number1Element,number2Element,operatorElement),
-    resultatElement.textContent = "Resultat : " + resultat,
+    resultatElement.textContent = "Result : " + result,
 });
-document.write(resultat)
+document.write("result :")
