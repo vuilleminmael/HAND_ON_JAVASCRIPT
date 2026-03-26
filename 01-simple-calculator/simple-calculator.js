@@ -30,5 +30,5 @@ console.log(calculer(number1Element, number2Element, operatorElement));
 document.getElementById("button").addEventListener("click",function() {
 
     result = calculer(number1Element, number2Element, operatorElement);
-    resultatElement.textContent = "Resultat : " + result;
+    resultatElement.textContent = "Resultat : " + result;  
 })
