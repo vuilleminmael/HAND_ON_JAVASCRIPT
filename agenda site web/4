@@ -1,0 +1,35 @@
+// =========================
+// 4. OBTENIR REFRESH TOKEN
+// =========================
+
+/*
+1. Va sur Google Cloud Console
+2. Active Google Calendar API
+3. Crée OAuth 2.0
+4. Ajoute ce scope:
+   https://www.googleapis.com/auth/calendar
+
+5. Lance ce script une fois:
+
+const authUrl = oauth2Client.generateAuthUrl({
+  access_type: 'offline',
+  scope: ['https://www.googleapis.com/auth/calendar']
+});
+
+console.log(authUrl);
+
+6. Ouvre le lien → copie le code → échange contre refresh token
+*/
+
+
+// =========================
+// 5. STRUCTURE DU PROJET
+// =========================
+
+/*
+projet/
+ ├── index.html
+ ├── style.css
+ ├── server.js
+ ├── package.json
+*/

@@ -1,0 +1,46 @@
+// =========================
+// 1. FRONTEND (index.html)
+// =========================
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Prise de RDV</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2>Réserver un rendez-vous</h2>
+
+    <input type="text" id="name" placeholder="Votre nom">
+    <input type="date" id="date">
+    <input type="time" id="time">
+
+    <button onclick="book()">Réserver</button>
+
+    <p id="status"></p>
+  </div>
+
+<script>
+async function book() {
+  const name = document.getElementById('name').value;
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+
+  const response = await fetch('http://localhost:3000/create-event', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, date, time })
+  });
+
+  const data = await response.json();
+  document.getElementById('status').innerText = data.message;
+}
+</script>
+
+</body>
+</html>
