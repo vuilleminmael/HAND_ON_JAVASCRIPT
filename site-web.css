@@ -185,12 +185,17 @@ align-items:center;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.main .content{
+    display: flex;
+    justify-content: center;
 }
 
 .main .content .card {
     display: flex;
     height: 100%;
-    margin-right: 10px;
 }
 
 .main .content .card .left {
@@ -198,9 +203,9 @@ align-items:center;
     padding: 20px;
     background: linear-gradient(to bottom, #cf50c5, #53add1);
     color: #fff;
-    width: 500px;
+    width: 100%;
     height: 300px;
-    transform: translate(250px);
+    flex-wrap: wrap; 
 }
 
 .main .content .card .right {
@@ -213,8 +218,8 @@ align-items:center;
     object-fit: cover;
     position:relative;
     top: 7px;
-    transform: translate(15px);
     margin-top: -10px;
+    flex-wrap: wrap;
 }
 footer {
     margin-top: 40px;
