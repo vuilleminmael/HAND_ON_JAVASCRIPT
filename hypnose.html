@@ -1,12 +1,620 @@
 <!DOCTYPE html>
-<!-- saved from url=(0095)file:///C:/Users/Vuillemin/Documents/Github/HAND_ON_JAVASCRIPT/siteweb.html%20code.html#contact -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <meta name="viewport" content="width=device-width, initial-scale=0.1">
-        <title>siteweb</title>
-        <link rel="stylesheet" href="hypnose.css">
-        <body>
-            <head>
-                <h1>Hypnose</h1>
-            </head>
-        </body>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hypnosens – Hypnose Ericksonienne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:       #4a6741;
+      --sage-light: #7a9e76;
+      --sage-pale:  #eef3ec;
+      --cream:      #faf8f3;
+      --warm:       #f2ede3;
+      --charcoal:   #2c2a25;
+      --mid:        #6b6760;
+      --gold:       #b8975c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,243,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(74,103,65,0.15);
+      padding: 1rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--sage);
+      letter-spacing: 0.03em;
+    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--sage); }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+    .hero-text {
+      padding: 6rem 4rem 6rem 6rem;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sage);
+      border: 1px solid var(--sage-light);
+      padding: 0.35rem 0.9rem;
+      border-radius: 2rem;
+      margin-bottom: 1.75rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      line-height: 1.2;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--sage);
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--mid);
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--sage);
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--sage-light); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-block;
+      border: 1.5px solid var(--sage);
+      color: var(--sage);
+      padding: 0.85rem 2rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-left: 1rem;
+      transition: all .2s;
+    }
+    .btn-outline:hover { background: var(--sage); color: #fff; }
+
+    .hero-image {
+      height: 92vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: saturate(0.85);
+    }
+    .hero-image::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--cream) 0%, transparent 20%);
+    }
+
+    /* SECTION BASE */
+    section { padding: 6rem 6rem; }
+
+    .section-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+    .section-lead {
+      font-size: 1.05rem;
+      color: var(--mid);
+      max-width: 640px;
+      margin-bottom: 3rem;
+    }
+
+    /* POURQUOI */
+    #pourquoi { background: var(--warm); }
+    .pourquoi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .pourquoi-blocks { display: flex; flex-direction: column; gap: 1.5rem; }
+    .info-block {
+      display: flex; gap: 1.25rem; align-items: flex-start;
+      background: var(--cream);
+      border-radius: 1rem;
+      padding: 1.5rem 1.75rem;
+      border: 1px solid rgba(74,103,65,0.12);
+    }
+    .info-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: var(--sage-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .info-block h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .info-block p  { font-size: 0.92rem; color: var(--mid); }
+
+    .pourquoi-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .pourquoi-visual img {
+      width: 100%; border-radius: 1rem;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+      filter: saturate(0.85);
+    }
+    .pourquoi-visual img:first-child {
+      grid-column: span 2;
+      aspect-ratio: 16/7;
+    }
+
+    /* THERAPIES */
+    #therapies { background: var(--cream); }
+    .therapies-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .therapies-list {
+      list-style: none;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+    }
+    .therapies-list li {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: var(--sage-pale);
+      padding: 0.7rem 1rem;
+      border-radius: 0.6rem;
+      font-size: 0.93rem;
+    }
+    .therapies-list li::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--sage);
+      flex-shrink: 0;
+    }
+
+    .audience-chips {
+      display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem;
+    }
+    .chip {
+      background: var(--gold);
+      color: #fff;
+      padding: 0.45rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    /* SEANCES */
+    #seances { background: var(--warm); }
+    .seances-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .card {
+      background: var(--cream);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      border: 1px solid rgba(74,103,65,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--sage-light);
+    }
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .card p { font-size: 0.93rem; color: var(--mid); }
+
+    /* DEROULEMENT */
+    #deroulement { background: var(--cream); }
+    .steps {
+      display: flex; flex-direction: column; gap: 0; max-width: 700px;
+    }
+    .step {
+      display: flex; gap: 2rem; align-items: flex-start;
+      padding-bottom: 2.5rem;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 20px; top: 44px;
+      width: 1px; bottom: 0;
+      background: rgba(74,103,65,0.25);
+    }
+    .step-num {
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: var(--sage);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .step-body h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.4rem; }
+    .step-body p  { font-size: 0.93rem; color: var(--mid); }
+
+    /* ATELIERS */
+    #ateliers {
+      background: var(--sage);
+      color: #fff;
+    }
+    #ateliers .section-tag { color: rgba(255,255,255,0.65); }
+    #ateliers .section-title { color: #fff; }
+    #ateliers .section-lead { color: rgba(255,255,255,0.8); }
+    .ateliers-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .atelier-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 1rem;
+      padding: 1.75rem;
+    }
+    .atelier-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+    .atelier-card p { font-size: 0.92rem; color: rgba(255,255,255,0.75); }
+    .badge-max {
+      display: inline-block;
+      background: var(--gold);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.3rem 0.85rem;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* SECURITE */
+    #securite { background: var(--warm); }
+    .securite-box {
+      background: var(--sage-pale);
+      border: 1px solid rgba(74,103,65,0.2);
+      border-radius: 1.25rem;
+      padding: 3rem;
+      max-width: 760px;
+      display: flex; gap: 2rem; align-items: flex-start;
+    }
+    .securite-icon {
+      font-size: 2.5rem; flex-shrink: 0;
+    }
+    .securite-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+    }
+    .securite-box p { font-size: 0.95rem; color: var(--mid); }
+
+    /* FOOTER */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.6);
+      padding: 3rem 6rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.88rem;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { height: 50vh; }
+      .hero-image::after { display: none; }
+      .hero-text { padding: 4rem 2rem; }
+      section { padding: 4rem 2rem; }
+      .pourquoi-grid,
+      .therapies-layout { grid-template-columns: 1fr; }
+      .seances-cards,
+      .ateliers-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="siteweb.html code.html" class="back">← Retour au site</a>
+  <div class="nav-logo">Hypnosens</div>
+  <ul>
+    <li><a href="#pourquoi">L'hypnose</a></li>
+    <li><a href="#therapies">Thérapies</a></li>
+    <li><a href="#seances">Séances</a></li>
+    <li><a href="#ateliers">Ateliers</a></li>
+    <li><a href="#deroulement">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-text">
+    <span class="hero-tag">Hypnose Ericksonienne</span>
+    <h1 class="hero-title">
+      Casser les croyances limitantes<br>
+      pour <em>libérer son mental</em>
+    </h1>
+    <p class="hero-subtitle">
+      Un accompagnement doux et naturel pour retrouver vos ressources intérieures
+      et avancer avec confiance.
+    </p>
+    <a href="#seances" class="btn-primary">Découvrir les séances</a>
+    <a href="#pourquoi" class="btn-outline">En savoir plus</a>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=80" alt="Paysage serein – nature apaisante"/>
+  </div>
+</section>
+
+<!-- POURQUOI -->
+<section id="pourquoi">
+  <div class="pourquoi-grid">
+    <div>
+      <p class="section-tag">Comprendre l'hypnose</p>
+      <h2 class="section-title">Pourquoi utiliser l'hypnose ?</h2>
+      <p class="section-lead">
+        L'hypnose est un état naturel que l'on expérimente plusieurs fois par jour.
+        Certains disent même que l'on se met en autohypnose toutes les 90 minutes
+        pour se ressourcer naturellement.
+      </p>
+      <div class="pourquoi-blocks">
+        <div class="info-block">
+          <div class="info-icon">🧠</div>
+          <div>
+            <h3>Travailler avec l'inconscient</h3>
+            <p>Le principe est de travailler avec notre inconscient plutôt qu'avec notre mental conscient, car il ne fait pas la différence entre le réel et l'imaginaire.</p>
+          </div>
+        </div>
+        <div class="info-block">
+          <div class="info-icon">🌱</div>
+          <div>
+            <h3>Héritage d'Erickson</h3>
+            <p>Milton Erickson (1901–1980) a consacré sa vie à l'hypnose, et c'est dès 1980 qu'elle a pris toute sa place dans les thérapies brèves.</p>
+          </div>
+        </div>
+        <div class="info-block">
+          <div class="info-icon">🔑</div>
+          <div>
+            <h3>Vos ressources intérieures</h3>
+            <p>« Nous avons, en nous, tous les ressources nécessaires pour y arriver. » Le thérapeute vous guide comme un GPS vers vos propres solutions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pourquoi-visual">
+      <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=900&q=80" alt="Méditation et concentration"/>
+      <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=500&q=80" alt="Nature apaisante"/>
+      <img src="https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?w=500&q=80" alt="Porte et lumière"/>
+    </div>
+  </div>
+</section>
+
+<!-- THERAPIES -->
+<section id="therapies">
+  <div class="therapies-layout">
+    <div>
+      <p class="section-tag">Domaines d'application</p>
+      <h2 class="section-title">Thérapies brèves en hypnose</h2>
+      <p class="section-lead">
+        Pour tout comportement et ressenti gênant, l'hypnose offre une approche
+        douce et efficace.
+      </p>
+      <ul class="therapies-list">
+        <li>La douleur</li>
+        <li>Le stress</li>
+        <li>La confiance en soi</li>
+        <li>L'estime de soi</li>
+        <li>Les peurs</li>
+        <li>Les phobies</li>
+        <li>Les addictions</li>
+        <li>Les troubles alimentaires</li>
+        <li>Les allergies</li>
+        <li>Les deuils…</li>
+      </ul>
+    </div>
+    <div>
+      <p class="section-tag">À qui s'adresse l'hypnose</p>
+      <h2 class="section-title">Pour tous les âges de la vie</h2>
+      <p class="section-lead">
+        L'hypnose s'adapte à chacun, quel que soit l'âge ou la situation.
+      </p>
+      <div class="audience-chips">
+        <span class="chip">Enfants</span>
+        <span class="chip">Adolescents</span>
+        <span class="chip">Adultes</span>
+        <span class="chip">Séniors</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SÉANCES -->
+<section id="seances">
+  <p class="section-tag">Ce que je propose</p>
+  <h2 class="section-title">Types de séances</h2>
+  <p class="section-lead">
+    Deux approches complémentaires pour vous accompagner là où vous en êtes.
+  </p>
+  <div class="seances-cards">
+    <div class="card">
+      <h3>Séances d'hypnose individuelles</h3>
+      <p>Un accompagnement personnalisé en hypnose Ericksonienne pour travailler sur vos blocages et libérer vos ressources intérieures, à votre propre rythme.</p>
+    </div>
+    <div class="card">
+      <h3>Coaching en développement personnel</h3>
+      <p>Vous en avez marre d'être dans le brouillard, de traîner vos doutes, vos peurs, vos incertitudes ? Reprenez le pouvoir sur votre vie et choisissez d'avancer.</p>
+    </div>
+    <div class="card" style="--c: var(--gold);">
+      <h3>Ateliers collectifs en pleine nature</h3>
+      <p>Des ateliers en plein air, dans la joie et la bonne humeur, sous forme de jeux — pour un développement personnel autrement. Maximum 15 personnes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DÉROULEMENT -->
+<section id="deroulement">
+  <p class="section-tag">Comment ça se passe</p>
+  <h2 class="section-title">Déroulement d'une séance</h2>
+  <p class="section-lead">
+    Une expérience en toute confiance et en toute sérénité.
+  </p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Temps d'échange</h3>
+        <p>Un moment d'écoute pour bien cibler vos attentes et comprendre ce que vous souhaitez travailler.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Induction hypnotique légère</h3>
+        <p>Une hypnose douce, avec des protocoles sous forme de jeux de visualisation, en toute confiance.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Lâcher-prise et ressources</h3>
+        <p>Vous accédez à vos ressources intérieures, trop souvent inexploitées, pour trouver vos propres solutions.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Retour apaisé</h3>
+        <p>Lorsque la séance s'achève, vous êtes comme relaxé et détendu, prêt à avancer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ATELIERS -->
+<section id="ateliers">
+  <p class="section-tag">À venir</p>
+  <h2 class="section-title">Ateliers en pleine nature</h2>
+  <p class="section-lead">
+    Des ateliers pour un développement personnel dans la joie et la bonne humeur,
+    sous forme de jeux.
+  </p>
+  <div class="badge-max">Maximum 15 personnes</div>
+  <div class="ateliers-grid">
+    <div class="atelier-card">
+      <h3>Atelier 1h30</h3>
+      <p>Une session courte et efficace pour découvrir ou approfondir une thématique de développement personnel.</p>
+    </div>
+    <div class="atelier-card">
+      <h3>Atelier demi-journée</h3>
+      <p>Une matinée ou une après-midi immersive en pleine nature pour explorer en profondeur vos ressources.</p>
+    </div>
+    <div class="atelier-card">
+      <h3>Atelier journée entière</h3>
+      <p>Une journée complète de transformation, dans la bonne humeur et la nature, pour aller plus loin ensemble.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SÉCURITÉ -->
+<section id="securite">
+  <p class="section-tag">Rassurance</p>
+  <h2 class="section-title">Quels sont les risques ?</h2>
+  <div class="securite-box">
+    <div class="securite-icon">🛡️</div>
+    <div>
+      <h3>L'hypnose ne présente aucun danger</h3>
+      <p>
+        On se « réveille » toujours, quoi qu'il arrive. D'abord parce qu'on ne dort pas —
+        c'est un état de veille paradoxal et non un état de sommeil. Ensuite, parce que
+        si aucune suggestion ne l'entretient, le fonctionnement hypnotique se dissipe de lui-même.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Hypnosens</div>
+  <div>Hypnose Ericksonienne · Thérapies brèves · Développement personnel</div>
+  <div>© 2024 Hypnosens</div>
+</footer>
+
+</body>
+</html>

@@ -1,14 +1,731 @@
 <!DOCTYPE html>
-<!-- saved from url=(0095)file:///C:/Users/Vuillemin/Documents/Github/HAND_ON_JAVASCRIPT/siteweb.html%20code.html#contact -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <meta name="viewport" content="width=device-width, initial-scale=0.1">
-        <title>siteweb</title>
-        <link rel="stylesheet" href="lahochi.css">
-        <body>
-            <head>
-                <h1>
-                    LaHoChi
-                </h1>
-            </head>
-        </body>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LaHoChi – Soin Énergétique par Apposition des Mains</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --indigo:       #3a3470;
+      --indigo-light: #6b63b5;
+      --indigo-pale:  #f0eef8;
+      --violet:       #8b7ec8;
+      --gold:         #c9a96e;
+      --gold-pale:    #fdf6ec;
+      --cream:        #fdfcf9;
+      --warm:         #f5f2eb;
+      --charcoal:     #1e1c2e;
+      --mid:          #6b6880;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-weight: 300;
+      line-height: 1.78;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(253,252,249,0.93);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(58,52,112,0.1);
+      padding: 1rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--indigo);
+      letter-spacing: 0.06em;
+    }
+    .nav-logo span { color: var(--gold); }
+    nav ul { list-style: none; display: flex; gap: 2.25rem; }
+    nav ul a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--indigo); }
+
+    /* HERO */
+    .hero {
+      min-height: 94vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 50%, rgba(107,99,181,0.14) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 15% 80%, rgba(201,169,110,0.1) 0%, transparent 50%),
+        var(--cream);
+    }
+    /* Orbes décoratifs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 420px; height: 420px;
+      background: rgba(139,126,200,0.18);
+      top: -80px; right: 5%;
+    }
+    .orb-2 {
+      width: 280px; height: 280px;
+      background: rgba(201,169,110,0.14);
+      bottom: 5%; right: 25%;
+    }
+    .orb-3 {
+      width: 180px; height: 180px;
+      background: rgba(58,52,112,0.1);
+      top: 40%; left: 5%;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 680px;
+      padding: 0 6rem;
+    }
+    .hero-syllables {
+      display: flex; gap: 0.2rem; margin-bottom: 1.5rem; align-items: center;
+    }
+    .syl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 2rem;
+    }
+    .syl-la { background: rgba(58,52,112,0.08); color: var(--indigo); }
+    .syl-sep { color: var(--mid); font-size: 0.7rem; }
+    .syl-ho { background: rgba(139,126,200,0.12); color: var(--violet); }
+    .syl-chi { background: rgba(201,169,110,0.15); color: var(--gold); }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.12;
+      color: var(--charcoal);
+      margin-bottom: 1.6rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--indigo-light);
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--mid);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--indigo);
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--indigo-light); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-block;
+      border: 1.5px solid var(--indigo);
+      color: var(--indigo);
+      padding: 0.85rem 2rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: all .2s;
+    }
+    .btn-outline:hover { background: var(--indigo); color: #fff; }
+
+    /* Flottant droit hero */
+    .hero-float {
+      position: absolute; right: 5%; top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .hero-pill {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(58,52,112,0.12);
+      border-radius: 0.9rem;
+      padding: 1rem 1.4rem;
+      backdrop-filter: blur(6px);
+      max-width: 220px;
+    }
+    .hero-pill .pill-icon { font-size: 1.3rem; margin-bottom: 0.4rem; }
+    .hero-pill h4 { font-size: 0.88rem; font-weight: 500; color: var(--charcoal); margin-bottom: 0.25rem; }
+    .hero-pill p  { font-size: 0.8rem; color: var(--mid); line-height: 1.5; }
+
+    /* SECTIONS */
+    section { padding: 6rem 6rem; }
+
+    .section-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    .section-lead {
+      font-size: 1.05rem;
+      color: var(--mid);
+      max-width: 640px;
+      margin-bottom: 3rem;
+    }
+
+    /* SIGNIFICATION */
+    #signification { background: var(--warm); }
+    .sig-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .syllable-cards { display: flex; flex-direction: column; gap: 1.25rem; }
+    .syl-card {
+      display: flex; gap: 1.5rem; align-items: center;
+      background: var(--cream);
+      border-radius: 1.25rem;
+      padding: 1.5rem 2rem;
+      border: 1px solid rgba(58,52,112,0.08);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .syl-card:hover { transform: translateX(6px); }
+    .syl-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .la { color: var(--indigo); }
+    .ho { color: var(--violet); }
+    .chi { color: var(--gold); }
+    .syl-card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .syl-card p  { font-size: 0.9rem; color: var(--mid); }
+
+    .sig-right { padding-left: 1rem; }
+    .sig-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--indigo);
+      border-left: 3px solid var(--gold);
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .sig-text { font-size: 0.95rem; color: var(--mid); margin-bottom: 1rem; }
+
+    /* BIENFAITS */
+    #bienfaits { background: var(--cream); }
+    .bienfaits-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+    }
+    .bien-card {
+      background: var(--warm);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      border: 1px solid rgba(58,52,112,0.07);
+      transition: background .2s;
+    }
+    .bien-card:hover { background: var(--indigo-pale); }
+    .bien-icon {
+      width: 44px; height: 44px;
+      background: var(--indigo-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .bien-card h3 { font-size: 0.97rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .bien-card p  { font-size: 0.88rem; color: var(--mid); }
+
+    /* DÉROULEMENT */
+    #deroulement { background: var(--indigo); color: #fff; }
+    #deroulement .section-tag { color: rgba(255,255,255,0.5); }
+    #deroulement .section-title { color: #fff; }
+    #deroulement .section-lead { color: rgba(255,255,255,0.7); }
+
+    .steps-row {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    }
+    .step-col {
+      position: relative;
+      padding: 2rem 1.5rem 1.5rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .step-col:last-child { border-right: none; }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.15);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .step-zone {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .step-col p { font-size: 0.88rem; color: rgba(255,255,255,0.65); }
+
+    /* SÉANCES */
+    #seances { background: var(--warm); }
+    .seances-layout {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;
+    }
+    .seance-cards { display: flex; flex-direction: column; gap: 1.25rem; }
+    .seance-card {
+      background: var(--cream);
+      border-radius: 1.25rem;
+      padding: 1.75rem 2rem;
+      border: 1px solid rgba(58,52,112,0.1);
+      display: flex; gap: 1.5rem; align-items: flex-start;
+    }
+    .sc-icon {
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: var(--indigo-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem;
+    }
+    .seance-card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.4rem; }
+    .seance-card p  { font-size: 0.9rem; color: var(--mid); }
+
+    .seances-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+    .info-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(58,52,112,0.08);
+      font-size: 0.93rem;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { color: var(--mid); min-width: 120px; font-size: 0.85rem; }
+    .info-val { font-weight: 500; }
+    .badge-distance {
+      display: inline-block;
+      background: var(--gold-pale);
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.3rem 0.85rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(201,169,110,0.3);
+    }
+
+    /* DIFFÉRENCE REIKI */
+    #difference { background: var(--cream); }
+    .diff-table {
+      width: 100%; max-width: 800px;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    .diff-table th {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 2px solid rgba(58,52,112,0.15);
+      color: var(--mid);
+    }
+    .diff-table th:last-child { color: var(--indigo); }
+    .diff-table td {
+      padding: 0.9rem 1.5rem;
+      border-bottom: 1px solid rgba(58,52,112,0.07);
+      color: var(--charcoal);
+    }
+    .diff-table td:first-child { color: var(--mid); font-size: 0.88rem; }
+    .diff-table td:last-child {
+      font-weight: 500;
+      color: var(--indigo);
+    }
+    .diff-table tr:last-child td { border-bottom: none; }
+
+    /* PRÉCAUTIONS */
+    #precautions { background: var(--warm); }
+    .prec-box {
+      background: var(--cream);
+      border: 1px solid rgba(201,169,110,0.3);
+      border-radius: 1.25rem;
+      padding: 2.5rem;
+      max-width: 740px;
+      display: flex; gap: 2rem; align-items: flex-start;
+    }
+    .prec-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .prec-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+    }
+    .prec-box p { font-size: 0.93rem; color: var(--mid); }
+
+    /* FOOTER */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.5);
+      padding: 3rem 6rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.87rem;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: #fff;
+    }
+    .footer-brand span { color: var(--gold); }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px) {
+      section { padding: 4rem 2rem; }
+      .hero-content { padding: 3rem 2rem; }
+      .hero-float { display: none; }
+      .hero { min-height: 80vh; }
+      .sig-grid,
+      .seances-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .bienfaits-grid { grid-template-columns: 1fr 1fr; }
+      .steps-row { grid-template-columns: 1fr; }
+      .step-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      nav ul { display: none; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .bienfaits-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">La<span>Ho</span>Chi</div>
+  <ul>
+    <li><a href="#signification">Le soin</a></li>
+    <li><a href="#bienfaits">Bienfaits</a></li>
+    <li><a href="#deroulement">Séance</a></li>
+    <li><a href="#seances">Pratique</a></li>
+    <li><a href="#difference">FAQ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-bg"></div>
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <div class="hero-orb orb-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-syllables">
+      <span class="syl syl-la">La</span>
+      <span class="syl-sep">·</span>
+      <span class="syl syl-ho">Ho</span>
+      <span class="syl-sep">·</span>
+      <span class="syl syl-chi">Chi</span>
+    </div>
+    <h1 class="hero-title">
+      Soin énergétique<br>
+      par <em>apposition des mains</em>
+    </h1>
+    <p class="hero-desc">
+      Une technique de haute vibration qui dissolve les blocages énergétiques
+      et stimule les capacités naturelles d'auto-guérison du corps, de l'âme et de l'esprit.
+    </p>
+    <div class="hero-cta">
+      <a href="#deroulement" class="btn-primary">Découvrir une séance</a>
+      <a href="#signification" class="btn-outline">Qu'est-ce que le LaHoChi ?</a>
+    </div>
+  </div>
+
+  <div class="hero-float">
+    <div class="hero-pill">
+      <div class="pill-icon">✋</div>
+      <h4>Apposition des mains</h4>
+      <p>5 positions spécifiques couvrant l'ensemble du corps énergétique.</p>
+    </div>
+    <div class="hero-pill">
+      <div class="pill-icon">🌐</div>
+      <h4>En présentiel ou à distance</h4>
+      <p>Les séances à distance offrent des résultats similaires à celles en cabinet.</p>
+    </div>
+    <div class="hero-pill">
+      <div class="pill-icon">✨</div>
+      <h4>Accessible à tous</h4>
+      <p>Aucun prérequis. Ouvert à tous les âges, toutes croyances.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNIFICATION -->
+<section id="signification">
+  <div class="sig-grid">
+    <div>
+      <p class="section-tag">Étymologie & origine</p>
+      <h2 class="section-title">Que signifie LaHoChi ?</h2>
+      <div class="syllable-cards">
+        <div class="syl-card">
+          <span class="syl-letter la">La</span>
+          <div>
+            <h3>Lumière, Amour & Sagesse</h3>
+            <p>Fait référence aux fréquences les plus élevées de la Lumière universelle — l'énergie de cœur à cœur.</p>
+          </div>
+        </div>
+        <div class="syl-card">
+          <span class="syl-letter ho">Ho</span>
+          <div>
+            <h3>Le mouvement de l'énergie</h3>
+            <p>Symbolise la mise en circulation, le flux et le déplacement de cette énergie lumineuse dans le corps.</p>
+          </div>
+        </div>
+        <div class="syl-card">
+          <span class="syl-letter chi">Chi</span>
+          <div>
+            <h3>Force de vie universelle</h3>
+            <p>Le chi ou ki, l'énergie vitale au cœur de la médecine traditionnelle chinoise — le souffle qui anime toute vie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sig-right">
+      <div class="sig-quote">
+        « Une énergie spirituelle aux fréquences vibratoires très élevées, transmise de cœur à cœur. »
+      </div>
+      <p class="sig-text">
+        Le LaHoChi est une technique énergétique réapparue en 1991, dans laquelle le praticien sert de canal à une énergie de haute fréquence qu'il transmet par légère apposition des mains.
+      </p>
+      <p class="sig-text">
+        Contrairement au Reiki, il ne nécessite ni symbole, ni mantra, ni rituel élaboré. Le praticien ne puise pas dans sa propre énergie vitale — il est simplement le canal de l'énergie universelle.
+      </p>
+      <p class="sig-text">
+        Le LaHoChi peut être utilisé seul ou en complément d'autres soins. Il agit sur les humains, les animaux, les plantes, et même la terre.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- BIENFAITS -->
+<section id="bienfaits">
+  <p class="section-tag">Pour qui, pour quoi</p>
+  <h2 class="section-title">Les bienfaits du LaHoChi</h2>
+  <p class="section-lead">
+    En dissolvant les blocages énergétiques, le soin favorise un retour à l'équilibre physique,
+    émotionnel et spirituel.
+  </p>
+  <div class="bienfaits-grid">
+    <div class="bien-card">
+      <div class="bien-icon">💛</div>
+      <h3>Traumatismes & chocs émotionnels</h3>
+      <p>Le LaHoChi restructure les corps subtils, particulièrement efficace après un choc émotionnel, un accident ou une opération difficile.</p>
+    </div>
+    <div class="bien-card">
+      <div class="bien-icon">🌿</div>
+      <h3>Stress & charge mentale</h3>
+      <p>Dissolve la charge mentale et affective qui freine votre quotidien. Procure une profonde détente et un sentiment de légèreté.</p>
+    </div>
+    <div class="bien-card">
+      <div class="bien-icon">⚡</div>
+      <h3>Douleurs & inflammations</h3>
+      <p>Peut soulager brûlures, piqûres, inflammations et douleurs, et favoriser la cicatrisation. Complète un traitement médical sans le remplacer.</p>
+    </div>
+    <div class="bien-card">
+      <div class="bien-icon">🔄</div>
+      <h3>Schémas répétitifs négatifs</h3>
+      <p>Aide à se libérer des modèles attracteurs négatifs, des comportements répétitifs et des mémoires du passé qui bloquent votre évolution.</p>
+    </div>
+    <div class="bien-card">
+      <div class="bien-icon">⚖️</div>
+      <h3>Équilibre des chakras</h3>
+      <p>Harmonise les centres énergétiques du corps déséquilibrés par la fatigue, la maladie ou un choc. Permet une harmonisation globale corps-esprit.</p>
+    </div>
+    <div class="bien-card">
+      <div class="bien-icon">🌱</div>
+      <h3>Développement personnel</h3>
+      <p>Outil puissant pour augmenter progressivement son taux vibratoire, sa conscience et sa capacité à se connecter à soi-même.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DÉROULEMENT -->
+<section id="deroulement">
+  <p class="section-tag">En pratique</p>
+  <h2 class="section-title">Les 5 positions du soin</h2>
+  <p class="section-lead">
+    Une séance dure environ 45 à 60 minutes. Le receveur reste allongé, habillé,
+    dans un état de profonde détente.
+  </p>
+  <div class="steps-row">
+    <div class="step-col">
+      <div class="step-num">01</div>
+      <div class="step-zone">La tête</div>
+      <p>Ouverture des centres supérieurs, connexion à la conscience et aux perceptions subtiles.</p>
+    </div>
+    <div class="step-col">
+      <div class="step-num">02</div>
+      <div class="step-zone">Le torse</div>
+      <p>Libération des tensions profondes, stimulation des capacités d'auto-guérison du corps physique.</p>
+    </div>
+    <div class="step-col">
+      <div class="step-num">03</div>
+      <div class="step-zone">Les bras</div>
+      <p>Rééquilibrage du flux énergétique dans les membres, harmonisation du système entier.</p>
+    </div>
+    <div class="step-col">
+      <div class="step-num">04</div>
+      <div class="step-zone">La région du cœur</div>
+      <p>Cœur du soin — transmission de l'énergie lumineuse de cœur à cœur. Libération émotionnelle profonde.</p>
+    </div>
+    <div class="step-col">
+      <div class="step-num">05</div>
+      <div class="step-zone">Hanches & jambes</div>
+      <p>Ancrage et enracinement. Circulation de l'énergie vers les membres inférieurs et retour à l'équilibre global.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SÉANCES -->
+<section id="seances">
+  <p class="section-tag">Modalités</p>
+  <h2 class="section-title">Comment se pratique le LaHoChi ?</h2>
+  <div class="seances-layout">
+    <div class="seance-cards">
+      <div class="seance-card">
+        <div class="sc-icon">🏡</div>
+        <div>
+          <h3>En cabinet ou à domicile</h3>
+          <p>La séance se déroule dans un environnement calme. Vous êtes allongé, habillé, recouvert si besoin d'une couverture légère pour le confort.</p>
+        </div>
+      </div>
+      <div class="seance-card">
+        <div class="sc-icon">🌐</div>
+        <div>
+          <h3>À distance</h3>
+          <p>Les soins à distance sont transmis avec des résultats similaires aux séances en présentiel. Une particularité remarquable du LaHoChi.</p>
+        </div>
+      </div>
+      <div class="seance-card">
+        <div class="sc-icon">🔁</div>
+        <div>
+          <h3>Plusieurs séances recommandées</h3>
+          <p>Après la séance, le receveur peut réactiver les énergies du soin pendant les 3 jours qui suivent. Des séances répétées approfondissent les effets.</p>
+        </div>
+      </div>
+      <div class="seance-card">
+        <div class="sc-icon">💧</div>
+        <div>
+          <h3>Après la séance</h3>
+          <p>Boire abondamment dans les 24h suivant le soin pour accompagner la libération des toxines et stimuler l'auto-guérison.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seances-info">
+      <h3>Informations pratiques</h3>
+      <div class="info-row">
+        <span class="info-label">Durée</span>
+        <span class="info-val">45 à 60 minutes</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Format</span>
+        <div>
+          <span class="badge-distance">Présentiel</span>&nbsp;
+          <span class="badge-distance">À distance</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Pour qui</span>
+        <span class="info-val">Tous âges, toutes croyances</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Tenue</span>
+        <span class="info-val">Habillé, confortable</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Accord</span>
+        <span class="info-val">Toujours avec votre consentement</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Échange préalable</span>
+        <span class="info-val">Pour cibler vos besoins</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="precautions">
+  <p class="section-tag">Important</p>
+  <h2 class="section-title">À savoir avant de commencer</h2>
+  <div class="prec-box">
+    <div class="prec-icon">⚠️</div>
+    <div>
+      <h3>Le LaHoChi est un soin complémentaire</h3>
+      <p>
+        Le LaHoChi n'appartient à aucun ordre religieux, philosophique ou sectaire et est ouvert à tous.
+        Il ne se substitue en aucun cas à une consultation médicale, psychiatrique ou psychologique,
+        ni à aucun traitement médical quel qu'il soit.
+        Il vient soutenir et compléter positivement votre parcours de soin.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">La<span>Ho</span>Chi</div>
+  <div>Soin énergétique · Apposition des mains · Bien-être holistique</div>
+  <div>© 2024 LaHoChi</div>
+</footer>
+
+</body>
+</html>
